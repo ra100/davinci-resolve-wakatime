@@ -1,0 +1,62 @@
+local pluginName = "fusion-wakatime"
+local version = "0.0.1"
+
+local USER_HOME = os.getenv("HOME")
+local CONFIG_FILENAME = USER_HOME .. "/.wakatime.cfg"
+
+fusion = fu
+
+wakatime_tracking = false
+
+print('Starting Wakatime Tracking')
+
+function fusion_is_focused()
+  local cmd = io.popen("xdotool getwindowfocus getwindowname")
+  local windowName = cmd:read("*a")
+  cmd:close()
+  if string.find(windowName, "Fusion") then
+    return true
+  end
+  return false
+end
+
+function sleep()
+  if package.config:sub(1,1) == '\\' then
+    -- Windows
+    os.execute("timeout /t 15")
+  else
+    -- Linux/OSX
+    os.execute("sleep 15")
+  end
+end
+
+function start_tracking()
+  while true and wakatime_tracking do
+    if fusion_is_focused() then
+      local composition = fusion.CurrentComp
+      if composition ~= nil then
+        local attributes = composition:GetAttrs()
+        local fileName = attributes.COMPS_FileName
+        if fileName ~= "" then
+          local cmd = string.format("wakatime \
+                  --entity-type file \
+                  --entity \"%s\" \
+                  --plugin \"%s/%s\" \
+                  --category designing \
+                  --config \"%s\"",
+                  fileName, pluginName, version, CONFIG_FILENAME)
+          print(cmd)
+          os.execute(cmd)
+        end
+      else
+        print('Composition is nil')
+      end
+    end
+    sleep()
+  end
+end
+
+if not wakatime_tracking then
+  wakatime_tracking = true
+  start_tracking()
+end
