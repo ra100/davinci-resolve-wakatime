@@ -26,17 +26,18 @@ def fusion_is_focused():
   return False
 
 while True:
-    composition = fusion.CurrentComp
-    attributes = composition.GetAttrs()
-    fileName = attributes['COMPS_FileName']
-    if fusion_is_focused():
-      if fileName is not None:
-          cmd = f"wakatime \
-                    --entity-type file \
-                    --entity \"{fileName}\" \
-                    --plugin \"{pluginName}/{version}\"\
-                    --category designing \
-                    --config \"{CONFIG_FILENAME}\""
-          os.system(cmd)
+  composition = fusion.CurrentComp
+  attributes = composition.GetAttrs()
+  fileName = attributes['COMPS_FileName']
+  if fusion_is_focused():
+    if fileName is not None:
+      cmd = f"wakatime \
+              --entity-type file \
+              --entity \"{fileName}\" \
+              --plugin \"{pluginName}/{version}\"\
+              --category designing \
+              --config \"{CONFIG_FILENAME}\""
 
-    time.sleep(30)
+      os.system(cmd)
+
+  time.sleep(30)

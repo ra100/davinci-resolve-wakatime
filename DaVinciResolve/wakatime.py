@@ -26,19 +26,20 @@ def resolve_is_focused():
   return False
 
 while True:
-    if resolve_is_focused():
-      project = projectManager.GetCurrentProject()
-      if project is not None:
-          projectName = project.GetName()
-          currentPage = resolve.GetCurrentPage()
-          if currentPage is not None:
-              cmd = f"wakatime --project \"{projectName}\" \
-                              --entity-type domain \
-                              --entity \"{currentPage}\" \
-                              --plugin \"{pluginName}/{version}\"\
-                              --category designing \
-                              --config \"{CONFIG_FILENAME}\""
-              print(cmd)
-              os.system(cmd)
+  if resolve_is_focused():
+    project = projectManager.GetCurrentProject()
+    if project is not None:
+      projectName = project.GetName()
+      currentPage = resolve.GetCurrentPage()
+      if currentPage is not None:
+        cmd = f"wakatime \
+                --project \"{projectName}\" \
+                --entity-type domain \
+                --entity \"{currentPage}\" \
+                --plugin \"{pluginName}/{version}\"\
+                --category designing \
+                --config \"{CONFIG_FILENAME}\""
 
-    time.sleep(30)
+        os.system(cmd)
+
+  time.sleep(30)
