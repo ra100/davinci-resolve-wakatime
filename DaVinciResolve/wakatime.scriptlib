@@ -65,6 +65,7 @@ function start_tracking()
                   --entity-type domain \
                   --entity \"%s\" \
                   --plugin \"%s/%s\" \
+                  --verbose \
                   --category designing",
                   projectName, currentPage, pluginName, version)
 
