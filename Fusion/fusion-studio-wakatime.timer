@@ -1,0 +1,9 @@
+[Unit]
+Description=Runs service for Fusion Studio heartbeat to wakatime
+
+[Timer]
+OnUnitActiveSec=15s
+Unit=fusion-studio-wakatime.service
+
+[Install]
+WantedBy=timers.target

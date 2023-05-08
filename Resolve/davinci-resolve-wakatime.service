@@ -1,0 +1,11 @@
+[Unit]
+Description=Sends a heartbeat to wakatime when DaVinci Resolve is running
+
+[Service]
+Type=simple
+StandardOutput=journal
+StandardError=journal
+ExecStart=/bin/bash -c 'xdotool getwindowfocus getwindowname | grep "DaVinci Resolve" && /opt/resolve/libs/Fusion/fuscript -l lua "$HOME/.local/bin/davinci-resolve-wakatime.lua"'
+
+[Install]
+WantedBy=default.target

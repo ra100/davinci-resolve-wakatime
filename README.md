@@ -1,12 +1,18 @@
-# davinci-resolve-wakatime
+# DaVinci Resolve Wakatime
 
-Tracks time spent on a project in a specific pate (cut, edit, color, ...) to wakatime.com
+Tracks time spent on a project in a specific page (cut, edit, color, ...) to wakatime.com.
 
-NOTE: Tested on Linux only
+Supported:
 
-## How to
+- DaVinci Resolve on Linux
+- Fusion Studio on Linux
+
+## How to install
 
 - install `wakatime-cli` - https://github.com/wakatime/wakatime-cli
-- install `xdotool`
-- for Resolve: copy `DaVinciResolve/wakatime.scriptlib` to `~/.local/share/DaVinciResolve/Fusion/Scripts`
-- for Fusion Studio: copy `Fusion/wakatime.scriptlib` to `~/.fusion/BlackmagicDesign/Fusion/Scripts`
+- run `make all`
+
+## Known issues
+
+- if Resolve and Fusion run at the same time, Fusion heartbeat won't work as
+  fuscript detects Fusion() from Resolve context
