@@ -1,38 +1,57 @@
 local pluginName = "fusion-wakatime"
 local version = "0.0.1"
+local DEBUG = true
 
 fusion = fu
 
 wakatime_tracking = false
 
-print('Starting Wakatime Tracking')
-
-function is_windows()
-  if package.config:sub(1,1) == '\\' then
-    return true
-  else
-    return false
+function log(message)
+  if DEBUG then
+    print(message)
   end
 end
 
-function get_active_window_title()
-  local cmd = 'tasklist /v /fo csv | findstr /i "Active" | findstr /i /v "N/A" | cut /d "," /f 2'
-  local handle = io.popen(cmd)
-  local result = handle:read("*a")
-  handle:close()
-  return result:match('"(.*)"')
-end
+function get_platform_and_arch()
+  local is_windows = package.config:sub(1,1) == '\\'
+  local is_macos = false
+  local is_linux = false
 
-function is_focused()
-  if is_windows() then
-    if get_active_window_title().find('Fusion') then
-      return true
+  local executable
+  if is_windows then
+    executable = jit.arch:lower() == 'x64' and 'wakatime-cli-windows-amd64' or 'wakatime-cli-windows-arm64'
+  else
+    if jit.arch:lower() == 'arm64' then
+      executable = '/.wakatime/wakatime-cli-darwin-arm64'
+      is_macos = true
     else
-      return false
+      executable = '/.wakatime/wakatime-cli-linux-amd64'
+      is_linux = true
     end
   end
 
-  local cmd = io.popen("xdotool getwindowfocus getwindowname")
+  return is_windows, is_macos, is_linux, executable
+end
+
+function get_wakatime_path()
+  local is_windows, is_macos, is_linux, executable = get_platform_and_arch()
+  return USER_HOME .. executable
+end
+
+function is_windows()
+  local is_windows = get_platform_and_arch()
+  return is_windows
+end
+
+function is_focused()
+  local command
+  if is_windows() then
+    command = 'tasklist /v /fo csv | findstr /i "Active" | findstr /i /v "N/A" | cut /d "," /f 2'
+  else
+    command = "xdotool getwindowfocus getwindowname"
+  end
+
+  local cmd = io.popen(command)
   local windowName = cmd:read("*a")
   cmd:close()
   if string.find(windowName, "Fusion") then
@@ -67,11 +86,11 @@ function start_tracking()
                   --verbose \
                   --category designing",
                   fileName, pluginName, version)
-          print(cmd)
+          log(cmd)
           os.execute(cmd)
         end
       else
-        print('Composition is nil')
+        log('Composition is nil')
       end
     end
 
@@ -79,7 +98,10 @@ function start_tracking()
   end
 end
 
-if not wakatime_tracking then
-  wakatime_tracking = true
+if not globals.wakatime_tracking then
+  print('Starting Wakatime Tracking')
+  globals.wakatime_tracking = true
   start_tracking()
+else
+  print('Wakatime Tracking already running')
 end
