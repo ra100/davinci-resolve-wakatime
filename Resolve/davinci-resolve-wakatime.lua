@@ -31,9 +31,10 @@ function hearbeat()
               --entity-type domain \\\
               --entity \"%s\" \\\
               --plugin \"DaVinci Resolve/%s %s/%s\" \\\
+              --language \"%s\" \\\
               --verbose \\\
               --category designing",
-              wakatimePath, projectName, currentPage, resolveVersion, pluginName, version)
+              wakatimePath, projectName, currentPage, resolveVersion, pluginName, version, currentPage)
 
       log(cmd)
       os.execute(cmd)

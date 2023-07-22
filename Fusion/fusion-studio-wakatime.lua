@@ -34,6 +34,7 @@ function hearbeat()
               --entity-type file \\\
               --entity \"%s\" \\\
               --plugin \"Fusion Studio/%s %s/%s\" \\\
+              --language Fusion \\\
               --verbose \\\
               --category designing",
               wakatimePath, fileName, fusionVersion, pluginName, version)
