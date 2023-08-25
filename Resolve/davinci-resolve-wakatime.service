@@ -5,7 +5,7 @@ Description=Sends a heartbeat to wakatime when DaVinci Resolve is running
 Type=simple
 StandardOutput=journal
 StandardError=journal
-ExecStart=/bin/bash "$HOME/.local/bin/davinci-resolve-wakatime.sh"
+ExecStart=/bin/bash -c HOME_PLACEHOLDER/.local/bin/davinci-resolve-wakatime.sh
 
 [Install]
 WantedBy=default.target
