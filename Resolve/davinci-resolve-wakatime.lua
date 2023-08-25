@@ -6,6 +6,17 @@ resolve = Resolve()
 
 local USER_HOME = os.getenv("HOME")
 
+local categoryMap = {
+  ["media"] = "researching",
+  ["cut"] = "designing",
+  ["edit"] = "designing",
+  ["fusion"] = "coding",
+  ["color"] = "designing",
+  ["fairlight"] = "designing"
+  ["deliver"] = "building",
+  ["*"] = "designing"
+}
+
 function log(message)
   if DEBUG then
     print(message)
@@ -26,6 +37,7 @@ function hearbeat()
     if currentPage ~= nil then
       local resolveVersion = resolve:GetVersionString()
       local wakatimePath = get_wakatime_path()
+      local category = categoryMap[currentPage] or categoryMap["*"]
       local cmd = string.format("%s \\\
               --project \"%s\" \\\
               --entity-type domain \\\
@@ -33,8 +45,8 @@ function hearbeat()
               --plugin \"DaVinci Resolve/%s %s/%s\" \\\
               --language \"%s\" \\\
               --verbose \\\
-              --category designing",
-              wakatimePath, projectName, currentPage, resolveVersion, pluginName, version, currentPage)
+              --category %s",
+              wakatimePath, projectName, currentPage, resolveVersion, pluginName, version, currentPage, category)
 
       log(cmd)
       os.execute(cmd)

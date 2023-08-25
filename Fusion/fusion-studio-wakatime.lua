@@ -36,7 +36,7 @@ function hearbeat()
               --plugin \"Fusion Studio/%s %s/%s\" \\\
               --language Fusion \\\
               --verbose \\\
-              --category designing",
+              --category coding",
               wakatimePath, fileName, fusionVersion, pluginName, version)
       log(cmd)
       os.execute(cmd)
