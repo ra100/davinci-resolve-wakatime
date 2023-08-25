@@ -6,6 +6,7 @@ prerequisites:
 
 fusion:
 	cp ./Fusion/fusion-studio-wakatime.lua ~/.local/bin/fusion-studio-wakatime.lua
+	cp ./Fusion/fusion-studio-wakatime.sh ~/.local/bin/fusion-studio-wakatime.sh
 	cp ./Fusion/fusion-studio-wakatime.service ~/.config/systemd/user/
 	cp ./Fusion/fusion-studio-wakatime.timer ~/.config/systemd/user/
 	systemctl --user daemon-reload
@@ -15,6 +16,7 @@ fusion:
 
 resolve:
 	cp ./Resolve/davinci-resolve-wakatime.lua ~/.local/bin/davinci-resolve-wakatime.lua
+	cp ./Resolve/davinci-resolve-wakatime.sh ~/.local/bin/davinci-resolve-wakatime.sh
 	cp ./Resolve/davinci-resolve-wakatime.service ~/.config/systemd/user/
 	cp ./Resolve/davinci-resolve-wakatime.timer ~/.config/systemd/user/
 	systemctl --user daemon-reload

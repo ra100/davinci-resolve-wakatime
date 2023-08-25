@@ -5,7 +5,7 @@ Description=Sends a heartbeat to wakatime when Fusion Studio is running
 Type=simple
 StandardOutput=journal
 StandardError=journal
-ExecStart=/bin/bash -c 'xdotool getwindowfocus getwindowname | grep "Fusion" && /opt/BlackmagicDesign/Fusion18/fuscript -l lua "$HOME/.local/bin/fusion-studio-wakatime.lua"'
+ExecStart=/bin/bash -c '$HOME/.local/bin/fusion-studio-wakatime.sh'
 
 [Install]
 WantedBy=default.target
