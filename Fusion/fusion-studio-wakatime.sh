@@ -2,7 +2,7 @@
 
 IDLE_TIME=$(xprintidle)
 
-if [ "$IDLE_TIME" -lt 15000 ]; then
+if [ "$IDLE_TIME" -gt 15000 ]; then
   exit 0;
 fi
 
