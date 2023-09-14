@@ -1,5 +1,5 @@
 local pluginName = "davinci-resolve-wakatime"
-local version = "1.0.0"
+local version = "1.0.1"
 local DEBUG = true
 
 resolve = Resolve()
@@ -12,7 +12,7 @@ local categoryMap = {
   ["edit"] = "designing",
   ["fusion"] = "coding",
   ["color"] = "designing",
-  ["fairlight"] = "designing"
+  ["fairlight"] = "designing",
   ["deliver"] = "building",
   ["*"] = "designing"
 }
