@@ -9,5 +9,5 @@ fi
 RESOLVE_ACTIVE=$(xdotool getwindowfocus getwindowname | grep "DaVinci Resolve")
 
 if [ -n "$RESOLVE_ACTIVE" ]; then
-  /opt/resolve/libs/Fusion/fuscript -l lua "$HOME/.local/bin/davinci-resolve-wakatime.sh"
+  /opt/resolve/libs/Fusion/fuscript -l lua "$HOME/.local/bin/davinci-resolve-wakatime.lua"
 fi
