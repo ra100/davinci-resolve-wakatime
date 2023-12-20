@@ -38,16 +38,7 @@ function hearbeat()
       local resolveVersion = resolve:GetVersionString()
       local wakatimePath = get_wakatime_path()
       local category = categoryMap[currentPage] or categoryMap["*"]
-      local cmd = string.format("%s \\\
-              --project \"%s\" \\\
-              --entity-type domain \\\
-              --entity \"%s\" \\\
-              --plugin \"DaVinci Resolve/%s %s/%s\" \\\
-              --language \"%s\" \\\
-              --verbose \\\
-              --category %s",
-              wakatimePath, projectName, currentPage, resolveVersion, pluginName, version, currentPage, category)
-
+      local cmd = string.format("%s --project \"%s\" --entity-type domain --entity \"%s\" --plugin \"DaVinci Resolve/%s %s/%s\" --language \"%s\" --verbose --category %s", wakatimePath, projectName, currentPage, resolveVersion, pluginName, version, currentPage, category)
       log(cmd)
       os.execute(cmd)
     end

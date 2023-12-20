@@ -30,13 +30,7 @@ function hearbeat()
     if fileName ~= "" then
       local fusionVersion = fusion:GetAttrs().FUSIONS_Version
       local wakatimePath = get_wakatime_path()
-      local cmd = string.format("%s \\\
-              --entity-type file \\\
-              --entity \"%s\" \\\
-              --plugin \"Fusion Studio/%s %s/%s\" \\\
-              --language Fusion \\\
-              --verbose \\\
-              --category coding",
+      local cmd = string.format("%s --entity-type file --entity \"%s\" --plugin \"Fusion Studio/%s %s/%s\" --language Fusion --verbose --category coding",
               wakatimePath, fileName, fusionVersion, pluginName, version)
       log(cmd)
       os.execute(cmd)
